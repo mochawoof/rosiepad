@@ -10,6 +10,14 @@ class Window extends JFrame {
 
     public JToolBar toolsBar;
     public GridBagConstraints toolsc;
+        public JButton brushb;
+        public JButton eraserb;
+        public JButton pencilb;
+        public JButton eyedropperb;
+        public JButton lassob;
+        public JButton marqueeb;
+        public JButton textb;
+        public JButton typeb;
 
     public Window() {
         setTitle("Rosiepad");
@@ -38,11 +46,35 @@ class Window extends JFrame {
         toolsBar.setLayout(new GridBagLayout());
 
         toolsc = new GridBagConstraints();
+        toolsc.gridx = 0; toolsc.gridy = 0;
 
-        toolsBar.add(new JButton("Brush"));
+        brushb = createAndAddToolsBarButton("B", "Brush");
+        eraserb = createAndAddToolsBarButton("E", "Eraser");
+        pencilb = createAndAddToolsBarButton("P", "Pencil");
+        eyedropperb = createAndAddToolsBarButton("EY", "Eyedropper");
+        lassob = createAndAddToolsBarButton("L", "Lasso");
+        marqueeb = createAndAddToolsBarButton("M", "Marquee");
+        textb = createAndAddToolsBarButton("T", "Text");
+        typeb = createAndAddToolsBarButton("TY", "Type");
+        
         add(toolsBar, BorderLayout.LINE_START);
 
         setVisible(true);
+    }
+
+    public JButton createAndAddToolsBarButton(String name, String tooltip) {
+        JButton b = new JButton(name);
+        b.setToolTipText(tooltip);
+
+        toolsBar.add(b, toolsc);
+
+        if (toolsc.gridx >= 1) {
+            toolsc.gridx = 0; toolsc.gridy++;
+        } else {
+            toolsc.gridx++;
+        }
+
+        return b;
     }
 
     public void setLaf(String lafName) {
